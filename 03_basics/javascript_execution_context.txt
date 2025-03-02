@@ -1,0 +1,99 @@
+Javascript Execution Context
+Javascript is single threaded and everything works as a process
+
+1. Global execution context
+	{} -> Global EC --> this
+	global ec is different for browser and environments like node, deno, etc
+	for browser the global ec value is window objects
+	
+2. Function/ fubctional execution context
+	
+	
+3. Eval execution context	
+	
+	
+How the javascript code runs
+{}
+1. Memory creation phase/ creation phase  --> allocates space for declared variables, functions
+2. Execution phase	
+
+
+let val1 = 10
+let val2 = 5
+function addNum(num1, num2){
+	let total = num1 + num2
+	return total
+}
+let result1 = addNum(val1, val2)
+let result2 = addNum(10,7)
+
+working: (refer above code)
+1. Global execution -> this
+2. Memory phase  (1st cycle)
+	val1 -> undefined
+	val2 -> undefined
+	addNum -> definition
+	result1 -> undefined
+	result2 -> undefined
+3. execution phase (2nd cycle)
+	val1 <- 10
+	val2 <- 5
+	addNum -> create new execution context (new variable environment + execution thread); af ter execution of this it will delete the context
+	result1 -> 15 
+	result2 -> 17 
+
+
+	1st execution of addNum
+	1. memory phase
+		val1 -> undefined
+		val2 -> undefined
+		total -> undefined
+	2. execution phase
+	 	num1 -> 10
+		num2 -> 5
+		total -> 15 (this value will be returned to global execution context)
+
+	2nd execution of addNum
+	1. memory phase
+		val1 -> undefined
+		val2 -> undefined
+		total -> undefined
+	2. execution phase
+	 	num1 -> 10
+		num2 -> 7
+		total -> 17 (this value will be returned to global execution context)	
+
+
+callstack
+The call stack is a crucial concept in JavaScript’s runtime environment, representing the mechanism by which the JavaScript engine keeps track of function calls in a program. It operates as a Last In, First Out (LIFO) data structure, meaning that the last function called is the first one to be resolved.
+
+function f1() {
+	console.log('Hi by f1!');
+}
+
+function f2() {
+	f1();
+	console.log('Hi by f2!');
+}
+
+f2();
+
+
+
+callstack
+
+console.log('Hi by f1!');
+		|
+		|
+function f1() {
+	console.log('Hi by f1!');
+}
+		|
+		|
+function f2() {
+	f1();
+	console.log('Hi by f2!');
+}
+		|
+		|
+global execution context
