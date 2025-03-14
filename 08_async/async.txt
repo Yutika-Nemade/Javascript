@@ -1,0 +1,14 @@
+Default javascript behaviour
+javascript is a synchronous (line by line execution) language
+javascript is single threaded
+
+
+execution context
+excute one line code of code at a time
+each opeartion waits for the last one to complete before executing
+
+call stack; memory heap
+
+Types of code
+1. Blocking code --> blocks the flow of program --> read file sync
+2. Non-blocking code --> does not block execution --> read file async

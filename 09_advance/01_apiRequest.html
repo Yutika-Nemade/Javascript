@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request</title>
+    <style>
+        .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+    </style>
+</head>
+<body>
+    Value	State	Description
+0	UNSENT	Client has been created. open() not called yet.
+1	OPENED	open() has been called.
+2	HEADERS_RECEIVED	send() has been called, and headers and status are available.
+3	LOADING	Downloading; responseText holds partial data.
+4	DONE	The operation is complete.
+<div class="card">
+    <img id="Avatar" style="width:100%">
+    <div class="container">
+      <h4 id="login"></h4>
+      <p id="followers"></p>
+    </div>
+  </div>
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/yutika-nemade'
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET',requestUrl)
+    xhr.onreadystatechange = function(){
+        // console.log(xhr.readyState)
+        // if(xhr.readyState === 4){
+        //     // const data = this.responseText
+        //     // console.log(typeof data)   // most of times the response is in string format
+
+        //     // to convert string to json 
+        //     const data = JSON.parse(this.responseText)
+        //     // console.log(typeof data)
+        //     // console.log(data)
+        // }
+        if(xhr.readyState === 4){
+            const data = JSON.parse(this.responseText)
+            console.log(data)
+            document.querySelector('#Avatar').innerHTML = `<img src="${data.avatar_url}" id="Avatar" style="width:100%">`
+            document.querySelector('#login').innerHTML = `${data.login}`
+            document.querySelector('#followers').innerHTML = `${data.followers}`
+        }
+    }
+    xhr.send()
+</script>
+</html>

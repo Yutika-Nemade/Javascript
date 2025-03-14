@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <div>
+        <ul id="images">
+            <li><img width="200px" height="200px" id="hotel" src="https://images.pexels.com/photos/18699853/pexels-photo-18699853/free-photo-of-dolmabahce-palace-in-istanbul.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="hotel"></li>
+            <li><img width="200px" height="200px" id="coffee" src="https://images.pexels.com/photos/30888208/pexels-photo-30888208/free-photo-of-cozy-morning-with-latte-art-and-newspaper.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""></li>
+            <li><img width="200px" height="200px" id="desert" src="https://images.pexels.com/photos/30586023/pexels-photo-30586023/free-photo-of-camel-ride-in-the-egyptian-desert.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""></li>
+            <li><img width="200px" height="200px" id="river" src="https://images.pexels.com/photos/709552/pexels-photo-709552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""></li>
+            <li><a href="http://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+// We can use onclick event in html element but its not the correct approach
+// another approach is
+// document.getElementById('hotel').onclick = function(){
+//     alert('Clicked hotel')
+// }
+// onclick doesn't provide much information and features
+
+// Best approach -- Event listeners provide ability of propagation
+// document.getElementById('hotel').addEventListener('click',function (){
+//     alert('Clicked hotel again')
+// },false)
+// 3rd parameter is by default false so no need to specify
+
+// another approach is using attachEvent
+// jquery - onEvent
+
+// document.addEventListener('coffee').addEventListener('click',function(e){
+
+// })
+
+
+// learn in detail 
+// type, timestamp, preventDefault, target, toElement, srcElement, currentTarget, clientX, clientY, offset, screenX, screenY, altkey, ctrlkey, shiftkey, keycode
+
+//Event propagation
+// event bubbling -- going from inside to outside(bottom to top) eg. if we have written two eventlistener 1 for ul and 1 for image inside li then it firstly it will activate for li one and then ul one --> caused due to false in 3rd parameter
+// event capturing -- going from outside to inside(top to bottom) eg. if we have written two eventlistener 1 for ul and 1 for image inside li then it firstly it will activate for ul one and then li one --> caused due to true in 3rd parameter
+
+// to stop event bubbling use method stopPropagation()
+
+// to prevent default behaviour of events use preventDefault()
+
+// Remove image by clicking on image
+document.querySelector('#images').addEventListener('click', function(e){
+    if(e.target.tagName === 'IMG'){
+        let removeObject = e.target.parentNode
+        removeObject.remove()
+    }
+})
+
+// another method to remove object
+// removeObject.parentNode.removeChild(removeObject)
+
+// events spill over
+
+</script>
+</html>
