@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<button id="orange">Orange</button>
+<button id="green">Green</button>
+<body>
+<script>
+    // lexical scoping --> function declared inside a function can access all the objects of outer function
+
+    function outer(){
+        let username = "abc"
+        function inner(){
+            console.log(username)
+        }
+        inner()
+    }
+    outer()
+
+    // closure
+
+    function makeFunc(){
+        const name = "abc"
+        function displayName(){
+            console.log(name)
+        }
+        return displayName
+    }
+
+    const myFunc = makeFunc()
+    myFunc()
+
+    // in closure --> when we returned inner function the outer functions lexical scope is returned
+
+</script>
+
+<script>
+    // document.getElementById("orange").onclick = function (){
+    //     document.body.style.backgroundColor = "Orange"
+    // }
+    // document.getElementById("green").onclick = function (){
+    //     document.body.style.backgroundColor = "Green"
+    // }
+
+
+    // Use case
+    function clickHandler(color){
+        // document.body.style.backgroundColor = `${color}`
+
+        return function(){
+            document.body.style.backgroundColor = `${color}`
+        }
+    }
+
+    document.getElementById('orange').onclick = clickHandler("orange")
+    document.getElementById('green').onclick = clickHandler("green")
+
+</script>
+</body>
+</html>
